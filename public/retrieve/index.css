@@ -1,0 +1,8 @@
+fieldset {
+    display: flex;
+    border: none;
+}
+
+table {
+    margin: 0 auto;
+}

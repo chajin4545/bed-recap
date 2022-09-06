@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Module Management</title>
+        <link href="../main.css" rel="stylesheet" />
+
+        <link href="./index.css" rel="stylesheet" />
+        <script src="./index.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <header>
+            <a href="../">Home</a>
+            <a href="../create">Create</a>
+            <a href="../retrieve">Retrieve</a>
+        </header>
+        <section>
+            <div>
+                <h1>Retrieve Module</h1>
+                <form>
+                    <fieldset>
+                        <p>
+                            <label>Code</label>
+                            <input type="text" name="code" required />
+                        </p>
+                    </fieldset>
+                    <button type="submit">Retrieve</button>
+                </form>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Credit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="code">-</td>
+                            <td class="name">-</td>
+                            <td class="credit">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </body>
+</html>

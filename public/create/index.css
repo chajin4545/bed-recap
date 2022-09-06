@@ -1,0 +1,10 @@
+fieldset {
+    display: flex;
+    border: none;
+}
+
+fieldset p {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+}
