@@ -19,16 +19,7 @@
         </header>
         <section>
             <div>
-                <h1>Retrieve Module</h1>
-                <form>
-                    <fieldset>
-                        <p>
-                            <label>Code</label>
-                            <input type="text" name="code" required />
-                        </p>
-                    </fieldset>
-                    <button type="submit">Retrieve</button>
-                </form>
+                <h1>Retrieve All Module</h1>
                 <table border="1">
                     <thead>
                         <tr>
@@ -37,15 +28,16 @@
                             <th>Credit</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="code">-</td>
-                            <td class="name">-</td>
-                            <td class="credit">-</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="module-tbody"></tbody>
                 </table>
             </div>
         </section>
+        <template id="row-template">
+            <tr>
+                <td class="code">-</td>
+                <td class="name">-</td>
+                <td class="credit">-</td>
+            </tr>
+        </template>
     </body>
 </html>

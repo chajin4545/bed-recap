@@ -19,25 +19,29 @@
         </header>
         <section>
             <div>
-                <h1>Create Module</h1>
+                <h1>Bulk Create</h1>
                 <form>
-                    <fieldset>
-                        <p>
-                            <label>Code</label>
-                            <input type="text" name="code" required />
-                        </p>
-                        <p>
-                            <label>Name</label>
-                            <input type="text" name="name" required />
-                        </p>
-                        <p>
-                            <label>Credit</label>
-                            <input type="number" name="credit" required />
-                        </p>
-                    </fieldset>
+                    <div id="fieldset-container"></div>
+                    <button id="add-row">Add row</button>
                     <button type="submit">Create</button>
                 </form>
             </div>
         </section>
+        <template id="input-template">
+            <fieldset>
+                <p>
+                    <label>Code</label>
+                    <input type="text" name="code" required />
+                </p>
+                <p>
+                    <label>Name</label>
+                    <input type="text" name="name" required />
+                </p>
+                <p>
+                    <label>Credit</label>
+                    <input type="number" name="credit" required />
+                </p>
+            </fieldset>
+        </template>
     </body>
 </html>

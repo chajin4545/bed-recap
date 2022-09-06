@@ -57,4 +57,25 @@ app.get('/modules/:code', function (req, res, next) {
         });
 });
 
+app.delete('/modules/:code', function (req, res, next) {
+    // TODO: Implement Delete module by Code
+});
+
+app.put('/modules/:code', function (req, res, next) {
+    // TODO: Implement Update module by Code
+    //      You can decide where you want to put the Credit in the Request
+});
+
+app.get('/modules', function (req, res, next) {
+    // TODO: Implement Get all modules
+});
+
+app.post('/modules/bulk', function (req, res, next) {
+    // TODO: Implement bulk insert modules
+});
+
+app.delete('/modules/bulk', function (req, res, next) {
+    // TODO: Implement bulk delete modules
+});
+
 module.exports = app;

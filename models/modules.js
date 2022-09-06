@@ -41,3 +41,23 @@ module.exports.retrieveByCode = function retrieveByCode(code) {
         return rows[0];
     });
 };
+
+module.exports.deleteByCode = function deleteByCode(code) {
+    // TODO implement delete by code
+};
+
+module.exports.updateByCode = function updateByCode(code, credit) {
+    // TODO implement update by code
+};
+
+module.exports.retrieveAll = function retrieveAll() {
+    // TODO implement retrieve all
+};
+
+module.exports.createBulk = function retrieveAll(newModules) {
+    // TODO implement bulk create
+};
+
+module.exports.deleteBulk = function retrieveAll(codes) {
+    // TODO implement bulk delete
+};
