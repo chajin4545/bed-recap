@@ -10,6 +10,12 @@ function calculateGpa(credits, grades, numberOfModules) {
     return 'Not Yet Implemented!';
 }
 
+function fetchModule(code) {
+    return fetch(`/modules/${code}`).then(function (response) {
+        return response.json();
+    });
+}
+
 window.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form'); // Only have 1 form in this HTML
 
@@ -33,10 +39,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
             nameCell.textContent = 'Loading...';
             creditCell.textContent = 'Loading...';
-            fetch(`/modules/${code}`)
-                .then(function (response) {
-                    return response.json();
-                })
+            fetchModule(code)
                 .then(function (body) {
                     if (body.error) throw new Error(body.error);
                     nameCell.textContent = body.module.name;
