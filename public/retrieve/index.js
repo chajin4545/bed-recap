@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const rows = document.querySelectorAll('tbody tr');
 
         // Extract codes first
-        const codes = [];
+        const modulePromises = [];
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
             const code = row.querySelector('td:first-child').textContent;
@@ -53,11 +53,11 @@ window.addEventListener('DOMContentLoaded', function () {
             nameCell.textContent = 'Loading...';
             creditCell.textContent = 'Loading...';
 
-            codes.push(code);
+            modulePromises.push(fetchModule(code));
         }
 
         // Send request for one code at a time
-        fetchModuleRecursive(codes, 0, []).then(function (results) {
+        Promise.all(modulePromises).then(function (results) {
             // Process all the result
             for (let i = 0; i < results.length; i++) {
                 const result = results[i];

@@ -67,7 +67,9 @@ app.get('/modules/:code', function (req, res, next) {
         .catch(function (error) {
             console.error(error);
             if (error instanceof EMPTY_RESULT_ERROR) {
-                return res.status(404).json({ error: error.message });
+                setTimeout(function () {
+                    return res.status(404).json({ error: error.message });
+                }, 3000);
             } else return res.status(500).json({ error: 'Unknown Error' });
         });
 });
