@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', function () {
         allInput.forEach((input) => {
             input.disabled = true;
         });
-        return fetch('http://localhost:3000/modules', {
+        return fetch('/modules', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

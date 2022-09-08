@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
             nameCell.textContent = 'Loading...';
             creditCell.textContent = 'Loading...';
-            fetch(`http://localhost:3000/modules/${code}`)
+            fetch(`/modules/${code}`)
                 .then(function (response) {
                     return response.json();
                 })
