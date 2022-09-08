@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const rows = document.querySelectorAll('tbody tr');
 
         // Extract codes first
-        const modulePromises = [];
+        const codes = [];
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
             const code = row.querySelector('td:first-child').textContent;
@@ -53,27 +53,33 @@ window.addEventListener('DOMContentLoaded', function () {
             nameCell.textContent = 'Loading...';
             creditCell.textContent = 'Loading...';
 
-            modulePromises.push(fetchModule(code));
+            codes.push(code);
         }
+        const codesCsv = codes.join(',');
 
-        // Send request for one code at a time
-        Promise.all(modulePromises).then(function (results) {
-            // Process all the result
-            for (let i = 0; i < results.length; i++) {
-                const result = results[i];
-                const row = rows[i];
-                const nameCell = row.querySelector('td:nth-child(2)');
-                const creditCell = row.querySelector('td:nth-child(3)');
-                if (!result.error) {
-                    // no error
-                    nameCell.textContent = result.module.name;
-                    creditCell.textContent = result.module.credit;
-                } else {
-                    nameCell.textContent = 'XXXXXXXX';
-                    creditCell.textContent = result.error;
+        fetch(`/modules/bulk?codes=${codesCsv}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (results) {
+                // results is a dictionary e,g, { ST0507: {...}, ST0502: {...} }
+                // Process all the result
+                for (let i = 0; i < results.length; i++) {
+                    const code = codes[i]; // get the code of each row
+                    const row = rows[i];
+                    const nameCell = row.querySelector('td:nth-child(2)');
+                    const creditCell = row.querySelector('td:nth-child(3)');
+                    if (results[code]) {
+                        // Dictionary look up
+                        // Code found, no error
+                        nameCell.textContent = result.module.name;
+                        creditCell.textContent = result.module.credit;
+                    } else {
+                        nameCell.textContent = 'XXXXXXXX';
+                        creditCell.textContent = result.error;
+                    }
                 }
-            }
-        });
+            });
     };
 
     // Calculating GPA
