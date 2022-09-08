@@ -41,6 +41,21 @@ app.post('/modules', function (req, res, next) {
         });
 });
 
+// Question: This needs to be before GET /modules/:code, why?
+app.get('/modules/bulk', function (req, res, next) {
+    const codesCsv = req.query.codes; // query parameters are strings
+    const codes = codesCsv.split(',');
+    return modulesModel
+        .retrieveBulk(codes)
+        .then(function (result) {
+            return res.json(result);
+        })
+        .catch(function (error) {
+            console.log(error);
+            return res.status(500).json({ error: 'Unknown Error!' });
+        });
+});
+
 app.get('/modules/:code', function (req, res, next) {
     const code = req.params.code;
 
@@ -68,10 +83,6 @@ app.put('/modules/:code', function (req, res, next) {
 
 app.get('/modules', function (req, res, next) {
     // TODO: Implement Get all modules
-});
-
-app.get('/modules/bulk', function (req, res, next) {
-    // TODO: Implement bulk retrieve
 });
 
 app.post('/modules/bulk', function (req, res, next) {

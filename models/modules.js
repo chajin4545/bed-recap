@@ -54,8 +54,18 @@ module.exports.retrieveAll = function retrieveAll() {
     // TODO implement retrieve all
 };
 
-module.exports.retrieveBulk = function retrieveAll(codes) {
-    // TODO implement bulk retrieve
+module.exports.retrieveBulk = function retrieveBulk(codes) {
+    const sql = 'SELECT * FROM modules_tab WHERE code IN (?)';
+    return query(sql, [codes]).then(function (response) {
+        const rows = response[0];
+        const result = {};
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const code = row.code;
+            result[code] = row;
+        }
+        return result;
+    });
 };
 
 module.exports.createBulk = function retrieveAll(newModules) {

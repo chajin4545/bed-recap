@@ -16,3 +16,7 @@ Content-Type: application/json
 ### Get Modules
 
 GET http://localhost:3000/modules/st0507 HTTP/1.1
+
+### Get Modules Bulk
+
+GET http://localhost:3000/modules/bulk?codes=st0507,st0506,ades HTTP/1.1
