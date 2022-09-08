@@ -70,6 +70,10 @@ app.get('/modules', function (req, res, next) {
     // TODO: Implement Get all modules
 });
 
+app.get('/modules/bulk', function (req, res, next) {
+    // TODO: Implement bulk retrieve
+});
+
 app.post('/modules/bulk', function (req, res, next) {
     // TODO: Implement bulk insert modules
 });

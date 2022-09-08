@@ -54,6 +54,10 @@ module.exports.retrieveAll = function retrieveAll() {
     // TODO implement retrieve all
 };
 
+module.exports.retrieveBulk = function retrieveAll(codes) {
+    // TODO implement bulk retrieve
+};
+
 module.exports.createBulk = function retrieveAll(newModules) {
     // TODO implement bulk create
 };
