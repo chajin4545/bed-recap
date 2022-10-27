@@ -58,7 +58,7 @@ app.get('/modules/bulk', function (req, res, next) {
 
 app.get('/modules/:code', function (req, res, next) {
     const code = req.params.code;
-
+    console.error(`---------------${code}----------------`)
     return modulesModel
         .retrieveByCode(code)
         .then(function (module) {
@@ -74,19 +74,62 @@ app.get('/modules/:code', function (req, res, next) {
 
 app.delete('/modules/:code', function (req, res, next) {
     // TODO: Implement Delete module by Code
+    const code = req.params.code;
+    console.error(`---------------${code}----------------`)
+    return modulesModel
+        .deleteByCode(code)
+        .then(function (module) {
+            return res.json({ module: module });
+        })
+        .catch(function (error) {
+            console.error(error);
+            if (error instanceof EMPTY_RESULT_ERROR) {
+                return res.status(404).json({ error: error.message });
+            } else return res.status(500).json({ error: 'Unknown Error' });
+        });
 });
 
 app.put('/modules/:code', function (req, res, next) {
     // TODO: Implement Update module by Code
     //      You can decide where you want to put the Credit in the Request
+    const code = req.body.code;
+    const credit = req.body.credit;
+    return modulesModel
+        .updateByCode(code,credit)
+        .then(function(module){
+            return res.json({module: module})
+        })
+        .catch(function (error) {
+            console.error(error);
+            if (error instanceof EMPTY_RESULT_ERROR) {
+                return res.status(404).json({ error: error.message });
+            } else return res.status(500).json({ error: 'Unknown Error' });
+        });
+
 });
 
 app.get('/modules', function (req, res, next) {
     // TODO: Implement Get all modules
+    return modulesModel
+        .retrieveAll()
+        .then(function(result){
+            return res.json({result:result})
+        }).catch(function (error) {
+            console.error(error);
+            if (error instanceof EMPTY_RESULT_ERROR) {
+                return res.status(404).json({ error: error.message });
+            } else return res.status(500).json({ error: 'Unknown Error' });
+        });
 });
 
 app.post('/modules/bulk', function (req, res, next) {
     // TODO: Implement bulk insert modules
+    let bulkdata = req.body.bulkData;
+    return modulesModel
+        .createBulk(bulkData)
+        .then(
+            
+        )
 });
 
 app.delete('/modules/bulk', function (req, res, next) {
