@@ -1,37 +1,47 @@
 const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 function randomInt(min, max) {
+    //get random integer that is between min and max.
     return Math.floor(Math.random() * (max - min) + min);
 }
 
 function randomWord(length) {
+    //get random combinations of words that is made from characters (I can decide the length of the word)
     let word = '';
     for (let i = 0; i < length; i++) {
         word += characters[randomInt(0, characters.length)];
     }
+
     return word;
 }
 
 function randomModule() {
+    //run random word function and retrive random word length of 6
     let code = randomWord(6);
+    
     const name = code;
     const credit = randomInt(2, 7);
+    //return json that contains code name and credit.(code and name are equal)
     return { code, name, credit };
 }
 
 function addNewEntry() {
     const template = document.querySelector('#input-template');
+    //clone the input template and create another one at the bottom
     const fieldset = template.content.firstElementChild.cloneNode(true);
-
+    //create new random module
     const module = randomModule();
+    //now insert all the values according to the values
     fieldset.querySelector('input[name=code]').value = module.code;
     fieldset.querySelector('input[name=name]').value = module.name;
     fieldset.querySelector('input[name=credit]').value = module.credit;
 
     const fieldSetContainer = document.querySelector('#fieldset-container');
+    //create new input fields
     fieldSetContainer.appendChild(fieldset);
 }
 
 window.addEventListener('DOMContentLoaded', function () {
+    //as the dom content is loaded, add a new input fields with random module.
     addNewEntry();
 
     const addRowButton = document.querySelector('#add-row');
@@ -43,10 +53,11 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const form = document.querySelector('form'); // Only have 1 form in this HTML
     form.onsubmit = function (e) {
-        e.preventDefault(); // prevent using the default submit behavior
-
+        e.preventDefault(); // prevent using the default submit behavior(which is reloading the whole page)
+        
+        //each field set contains 3 input fields: code name and credit
         const allFieldset = form.querySelectorAll('fieldset');
-
+        
         const body = [];
         allFieldset.forEach(function (fieldset) {
             const code = fieldset.querySelector('input[name=code]').value;
@@ -54,8 +65,20 @@ window.addEventListener('DOMContentLoaded', function () {
             const credit = fieldset.querySelector('input[name=credit]').value;
 
             // Push code, name, and credit in an array (in that order) into body
+            body.push([code,name,credit]);
         });
 
         //TODO send body to backend to perform bulk insert
+        return fetch("/modules/bulk",{
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                bulkData : body                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            }),
+        })
+        
+            
     };
 });

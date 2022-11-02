@@ -6,8 +6,23 @@
  * GPA = (sum of all (credits[i] * grades[i])) / (sum of all credits[i])
  * */
 function calculateGpa(credits, grades, numberOfModules) {
-    if (numberOfModules === 0) return 0;
-    return 'Not Yet Implemented!';
+    if (numberOfModules === 0) {
+        return 0;
+    }
+    else{
+        let sum = credits.reduce((partialSum, a) => partialSum + a, 0);
+        let totalGPA = 0;
+        let grade;
+        let percentage;
+        
+        for (let i = 0; i < credits.length; i++) {
+            percentage = credits[i]/sum;
+            grade = grades[i];
+            totalGPA += grade * percentage; 
+        }
+        return "Your total GPA is: "+totalGPA.toFixed(2);
+    }
+    
 }
 
 function fetchModule(code) {
