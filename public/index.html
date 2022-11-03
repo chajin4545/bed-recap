@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Module Management - CA3</title>
+        <link href="main.css" rel="stylesheet" />
+
+        <link href="index.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <a href="./">Home</a>
+            <a href="./create">Create</a>
+            <a href="./retrieve">Retrieve</a>
+            <a href="./retrieve/all">Retrieve All</a>
+            <a href="./delete">Delete</a>
+            <a href="./update">Update</a>
+            <a href="./create/bulk">Bulk Create</a>
+            <a href="./delete/bulk">Bulk Delete</a>
+        </header>
+        <section style="height: auto">
+            <div>
+                <h1>Module Management - CA3</h1>
+                <div>
+                    <h3>Basic Tasks</h3>
+                    <ol>
+                        <li>Implement GPA calculator</li>
+                        <li>Implement Delete by Code</li>
+                        <li>Implement Update Credit by Code</li>
+                        <li>Implement View all Module</li>
+                    </ol>
+                    <h5>Details</h5>
+                    <ul>
+                        <li class="deadline">Deadline: By end of Week 3</li>
+                        <li>One insert/delete fails, all insert/delete fail</li>
+                        <li>1 HTTP Request and 1 SQL Query per bulk operation</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Advanced Tasks</h3>
+                    <ol>
+                        <li>Implement Bulk Insert</li>
+                        <li>Implement Bulk Delete</li>
+                    </ol>
+                    <h5>Details</h5>
+                    <ul>
+                        <li class="deadline">Deadline: By end of Week 12</li>
+                        <li>One insert/delete fails, all insert/delete fail</li>
+                        <li>1 HTTP Request and 1 SQL Query per bulk operation</li>
+                        <li class="fulfill-with-ca1">You can use your CA1 to demonstrate this also</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Super Advanced Tasks</h3>
+                    <ol>
+                        <li>Informative Bulk Insert</li>
+                    </ol>
+                    <h5>Informative Bulk Insert Details</h5>
+                    <p>Before executing the bulk insertion, the app should inform me the following information</p>
+                    <ul>
+                        <li>Which module does not exists and will be newly created?</li>
+                        <li>Which module exists and values will be updated?</li>
+                        <li>Which module exists and will not be updated?</li>
+                        <li>At most 5 HTTP request and 5 SQL queries (even for 100 new modules)</li>
+                        <li>Once acknowledged by user, go ahead and insert/update the entries</li>
+                        <li>At most another 5 HTTP request and 5 SQL queries (even for 100 new modules)</li>
+                    </ul>
+                    <p class="fulfill-with-ca1">You can use your CA1/CA2 to demonstrate this also</p>
+                    <p class="deadline">Deadline: By end of CA2</p>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
