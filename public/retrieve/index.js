@@ -20,7 +20,7 @@ function calculateGpa(credits, grades, numberOfModules) {
             grade = grades[i];
             totalGPA += grade * percentage; 
         }
-        return "Your total GPA is: "+totalGPA.toFixed(2);
+        return totalGPA.toFixed(2);
     }
     
 }
