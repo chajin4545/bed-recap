@@ -47,8 +47,9 @@ module.exports.deleteByCode = function deleteByCode(code) {
     const sql = `DELETE FROM modules_tab WHERE code = ?`
     return query(sql, [code]).then(function (result) {
         const rows = result[0];
+        let affectedRows = rows.affectedRows;
         console.log(rows);
-        if (rows.length === 0) {
+        if (affectedRows === 0) {
             throw new EMPTY_RESULT_ERROR(`Module ${code} not found!`);
         }
         return rows[0];
@@ -61,7 +62,7 @@ module.exports.updateByCode = function updateByCode(code, credit) {
     return query(sql, [credit,code]).then(function(result){
         const rows = result[0];
         console.log(rows);
-        if (rows.length === 0) {
+        if (rows.affectedRows === 0) {
             console.log(result)
             throw new EMPTY_RESULT_ERROR(`Module ${code} not found!`);
         }

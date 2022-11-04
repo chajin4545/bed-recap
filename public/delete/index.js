@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 },
             }).then(function(response) {
                 console.log("response STATUS: " + response.status)
-                if (response.status !== 200) return response.json(); // parse body as JSON string
+                if (response.status !== 200) throw new Error;
 
                 // Clear inputs
                 allInput.forEach((input) => {
@@ -29,8 +29,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 alert(`Module "${code}" Deleted!`);
                 return; // Success response has no body, hence next .then() will be null
-
-                
+            })
+            .catch(function(){
+                alert("Module not exist")
             })
             .finally(function () {
                 // Enable inputs
