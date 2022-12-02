@@ -72,6 +72,21 @@ app.get('/modules/:code', function (req, res, next) {
         });
 });
 
+app.delete('/modules/bulk', function (req, res, next) {
+    // TODO: Implement bulk delete modules
+    let modulesArr = req.body.modulesArr;
+    return modulesModel
+    .deleteBulk(modulesArr)
+    .then(function(modules){
+        return res.status(200).json({modules : modules})
+    })
+    .catch(function(error){
+        if (error instanceof EMPTY_RESULT_ERROR) {
+            return res.status(404).json({ error: error.message });
+        } else return res.status(500).json({ error: 'Unknown Error' });
+    })
+});
+
 app.delete('/modules/:code', function (req, res, next) {
     // TODO: Implement Delete module by Code
     const code = req.params.code;
@@ -126,14 +141,16 @@ app.post('/modules/bulk', function (req, res, next) {
     // TODO: Implement bulk insert modules
     let bulkdata = req.body.bulkData;
     return modulesModel
-        .createBulk(bulkData)
-        .then(
-            
-        )
-});
-
-app.delete('/modules/bulk', function (req, res, next) {
-    // TODO: Implement bulk delete modules
+        .createBulk(bulkdata)
+        .then(function(){
+            return res.sendStatus(201);
+        })
+        .catch(function(error){
+            if(error instanceof DUPLICATE_ENTRY_ERROR){
+                return res.status(404).json({error: error.message})
+            }
+            else return res.status(500).json({error : 'Unknown Error'})
+        })
 });
 
 module.exports = app;

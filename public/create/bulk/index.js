@@ -1,3 +1,5 @@
+//const { response } = require("../../../app");
+
 const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 function randomInt(min, max) {
     //get random integer that is between min and max.
@@ -78,7 +80,26 @@ window.addEventListener('DOMContentLoaded', function () {
                 bulkData : body                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
             }),
         })
-        
+        .then(function (response) {
+            if(response.status == 404){
+                throw Error('Duplicate error')
+            }
+            else if(response.status != 201){
+                throw Error('Unknown Error')
+            }
+
+            alert("Bulk create successfull!")
+            window.location.reload();
+            return;
+        })
+        .catch(function(error){
+            if(error.message == 'Duplicate error'){
+                alert("Duplication Error! Please try again");
+            }
+            else{
+                alert('Unknown Error!');
+            }
             
+        })
     };
 });

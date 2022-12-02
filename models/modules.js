@@ -99,10 +99,26 @@ module.exports.retrieveBulk = function retrieveBulk(codes) {
 
 module.exports.createBulk = function createBulk(newModules) {
     // TODO implement bulk create
-    const sql = ``
-    
+    const sql = `INSERT INTO modules_tab (code,name,credit) VALUES ?`
+    return query(sql, [newModules]).catch(function (error) {
+        console.log(error)
+        if (error.errno === MYSQL_ERROR_CODE.DUPLICATE_ENTRY) {
+            throw new DUPLICATE_ENTRY_ERROR(`Module already exists`);
+        }
+        throw error;
+    });
 };
 
-module.exports.deleteBulk = function deleteBulk(codes) {
+module.exports.deleteBulk = function deleteBulk(modulesArr) {
     // TODO implement bulk delete
+    const sql = `DELETE FROM modules_tab WHERE code IN (?)`
+    return query(sql, [modulesArr]).then(function (result) {
+        const rows = result[0];
+        let affectedRows = rows.affectedRows;
+        if (affectedRows === 0) {
+            throw new EMPTY_RESULT_ERROR(`Modules not found!`);
+        }
+        console.log(rows[0])
+        return rows[0];
+    });
 };

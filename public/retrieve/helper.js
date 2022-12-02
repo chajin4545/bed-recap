@@ -2,7 +2,7 @@ function addToTable(code, name, credit) {
     // Read more about HTML template here: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
     const template = document.querySelector('#row-template');
     const row = template.content.firstElementChild.cloneNode(true);
-
+    console.log(row)
     row.querySelector('.code').textContent = code;
     row.querySelector('.name').textContent = name;
     row.querySelector('.credit').textContent = credit;
