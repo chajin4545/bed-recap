@@ -72,6 +72,50 @@ app.get('/modules/:code', function (req, res, next) {
         });
 });
 
+app.get('/bulkModules/code/:codes', function (req, res, next) {
+    const code = req.params.codes.split(",");
+    console.error(`---------------${code}----------------`)
+    return modulesModel
+        .bulkRetrieveByCode(code)
+        .then(function (module) {
+            return res.json({ module: module });
+        })
+        .catch(function (error) {
+            console.error(error);
+            if (error instanceof EMPTY_RESULT_ERROR) {
+                return res.status(404).json({ error: error.message });
+            } else return res.status(500).json({ error: 'Unknown Error' });
+        });
+});
+app.get('/bulkModules/name/:names', function (req, res, next) {
+    const name = req.params.names.split(",");
+    return modulesModel
+        .bulkRetrieveByName(name)
+        .then(function (module) {
+            return res.json({ module: module });
+        })
+        .catch(function (error) {
+            console.error(error);
+            if (error instanceof EMPTY_RESULT_ERROR) {
+                return res.status(404).json({ error: error.message });
+            } else return res.status(500).json({ error: 'Unknown Error' });
+        });
+});
+app.get('/bulkModules/codeNames/:codeNames', function (req, res, next) {
+    const codeNames = req.params.codeNames.split("/");
+    return modulesModel
+        .bulkRetrieveByCodeName(codeNames)
+        .then(function (module) {
+            return res.json({ module: module });
+        })
+        .catch(function (error) {
+            console.error(error);
+            if (error instanceof EMPTY_RESULT_ERROR) {
+                return res.status(404).json({ error: error.message });
+            } else return res.status(500).json({ error: 'Unknown Error' });
+        });
+});
+
 app.delete('/modules/bulk', function (req, res, next) {
     // TODO: Implement bulk delete modules
     let modulesArr = req.body.modulesArr;

@@ -41,6 +41,38 @@ module.exports.retrieveByCode = function retrieveByCode(code) {
         return rows[0];
     });
 };
+module.exports.bulkRetrieveByCode = function bulkRetrieveByCode(code) {
+    const sql = `SELECT * FROM modules_tab WHERE (code) VALUES ?`;
+    return query(sql, [code]).then(function (result) {
+        const rows = result[0];
+        if (rows.length === 0) {
+            throw new EMPTY_RESULT_ERROR(`Module not found!`);
+        }
+        return rows[0];
+    });
+};
+
+module.exports.bulkRetrieveByName = function bulkRetrieveByName(name) {
+    const sql = `SELECT * FROM modules_tab WHERE (name) VALUES ?`;
+    return query(sql, [name]).then(function (result) {
+        const rows = result[0];
+        if (rows.length === 0) {
+            throw new EMPTY_RESULT_ERROR(`Module not found!`);
+        }
+        return rows[0];
+    });
+};
+
+module.exports.bulkRetrieveByCodeName = function bulkRetrieveByCodeName(codeName) {
+    const sql = `SELECT * FROM modules_tab WHERE (code , name) VALUES ?`;
+    return query(sql, [codeName]).then(function (result) {
+        const rows = result[0];
+        if (rows.length === 0) {
+            throw new EMPTY_RESULT_ERROR(`Module not found!`);
+        }
+        return rows[0];
+    });
+};
 
 module.exports.deleteByCode = function deleteByCode(code) {
     // TODO implement delete by code
@@ -122,3 +154,4 @@ module.exports.deleteBulk = function deleteBulk(modulesArr) {
         return rows[0];
     });
 };
+
